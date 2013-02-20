@@ -15,6 +15,7 @@ for (int i = 0; i < n; i++) {
 }
 Thread.sleep(3000);
 out.print(sum);
+System.out.print("test for git hub");
 %>
 </body>
 </html>
