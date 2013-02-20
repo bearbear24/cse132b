@@ -13,40 +13,19 @@
 		<h3>Data Entry Menu</h3>
 
 		<ul id="navigation" class="nav nav-pills inline">
-	<li>
-    <a href="menu.html">Home</a>
-    </li>
-    <li>
-        <a href="courses.jsp">Courses</a>
-    </li>
-    <li >
-        <a href="classes.jsp">Classes</a>
-    </li>
-    <li >
-        <a href="students.jsp">Students</a>
-    </li>
-     <li>
-        <a href="faculty.jsp">Faculty</a>
-    </li>
-    <li>
-        <a href="courseenroll.jsp">Course Enrollment</a>
-    </li>
-     <li>
-        <a href="pastcourse.jsp">Classes taken</a>
-     </li>
-         <li>
-        <a href="committee.jsp">Thesis Committee</a>
-    </li>
-             <li>
-        <a href="probation.jsp">Probation</a>
-    </li>
-    <li class="active">
-        <a href="reviewsession.jsp">Review session</a>
-    </li>
-    <li >
-        <a href="degree.jsp">Degree requirement</a>
-    </li>
-</ul>
+			<li><a href="menu.html">Home</a></li>
+			<li><a href="courses.jsp">Courses</a></li>
+			<li><a href="classes.jsp">Classes</a></li>
+			<li><a href="students.jsp">Students</a></li>
+			<li><a href="faculty.jsp">Faculty</a></li>
+			<li><a href="courseenroll.jsp">Course Enrollment</a></li>
+			<li><a href="pastcourse.jsp">Classes taken</a></li>
+			<li><a href="committee.jsp">Thesis Committee</a></li>
+			<li><a href="probation.jsp">Probation</a></li>
+			<li class="active"><a href="reviewsession.jsp">Review
+					session</a></li>
+			<li><a href="degree.jsp">Degree requirement</a></li>
+		</ul>
 	</div>
 	<div class="container-wide">
 		<div id="form">
@@ -83,7 +62,7 @@
 								.prepareStatement("INSERT INTO review_session VALUES (?, ?, ?)");
 						String date = request.getParameter("date");
 						String time = request.getParameter("time");
-						date = date + "_" + time;
+						date = date + " " + time;
 
 						pstmt.setString(1, (request.getParameter("SECTIONID")));
 						pstmt.setString(2, date);
@@ -208,25 +187,30 @@
 
 				<%-- -------- Iteration Code -------- --%>
 				<%
+				System.out.println("before");
 					while (rs.next()) {
+						System.out.println("inner");
 				%>
 
 				<tr>
 					<form action="reviewsession.jsp" method="get">
 						<%
 							String datetime = rs.getString("date_time");
-							String[] datetimeStr = datetime.split("_");
-							String display = datetimeStr[0] + " " + datetimeStr[1];
+						System.out.print("datetime = " + datetime.split("\\.")[0]);
+							String display = datetime.split("\\.")[0]; 
+							System.out.print("time display: " + display);
 						%>
-						<input type="hidden" value="update" name="action"> 
-						<input type="hidden" value="<%=rs.getString("section_id")%>"
-							name="SECTIONID"> <input type="hidden" 
+						<input type="hidden" value="update" name="action"> <input
+							type="hidden" value="<%=rs.getString("section_id")%>"
+							name="SECTIONID"> <input type="hidden"
 							value="<%=rs.getString("date_time")%>" name="datetime">
 						<%-- Get the ID --%>
 						<td><p>
-							<%=(rs.getString("section_id") + "("
+								<%=(rs.getString("section_id") + "("
 							+ sectionMap.get(rs.getString("section_id")) + ")")%></p>
-						<td colspan="2"><p> <%=display%><p></td>
+						<td colspan="2"><p>
+								<%=display%>
+							<p></td>
 						<td><input type="text" value="<%=rs.getString("place")%>"
 							name="place"></td>
 						<td><input class="btn btn-info" type="submit" value="Update"></td>
