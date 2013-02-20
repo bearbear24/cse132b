@@ -1,0 +1,16 @@
+.table-nonfluid {
+   width: auto;
+}
+.toolong {
+	margin-left:150px;
+	margin-right:90px
+}
+
+.classdiv {
+	border:1px #D8D8D8 solid;
+	margin-down:3px;
+}
+.inner {
+	height:10px;
+	background-color:#D8D8D8;
+}
